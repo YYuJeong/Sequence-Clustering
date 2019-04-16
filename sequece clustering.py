@@ -165,15 +165,15 @@ def AgglomerativeClustering(data):
             distArr.append(NewLevenshteinDistance(data['Transaction'][i], data['Transaction'][j]))
     dist = squareform(distArr)
     aggloClusters = linkage(dist, method='complete')
-    '''
-   # printcluster=pd.DataFrame(aggloClusters, columns=['clusterID_1', 'clusterID_2', 'distance', 'cluster member num'],
-    #             index=['cluster %d' %(i+1) for i in range(aggloClusters.shape[0])])
+    
+    printcluster=pd.DataFrame(aggloClusters, columns=['clusterID_1', 'clusterID_2', 'distance', 'cluster member num'],
+                index=['cluster %d' %(i+1) for i in range(aggloClusters.shape[0])])
     dendro = dendrogram(aggloClusters, labels = data['Id'])
-    '''
+    #print(dendro)
 
     return aggloClusters
 
-    '''
+'''
 def kMeansClustering(data):
     NUM_CLUSTERS = 3
    # data =  np.array([[0, 1], [1, 0], [2, 0], [3,4]]) 
@@ -200,8 +200,8 @@ if __name__ == '__main__':
     dist = ComputeDistMatrix(data)    
     print("< Agglomerative Clustering >")
     aggloClusters = AgglomerativeClustering(data)
-    dendro = dendrogram(aggloClusters, labels = data['Id'])
-    print(aggloClusters)
+    #dendro = dendrogram(aggloClusters, labels = data['Id'])
+   # print(aggloClusters)
     print("=="*30)
 
 
