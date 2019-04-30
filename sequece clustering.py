@@ -166,9 +166,9 @@ def GenerateRandomSequence():
     electronicsItemArr = [generateRandomSequence(3, electronicsChars) for j in range(10)]
     fashionItemArr = [generateRandomSequence(3, fashionChars) for j in range(10)]
     '''
-    foodItemArr = [[generateRandomSequence(i, foodChars) for j in range(50)] for i in range(1,6)]
-    electronicsItemArr = [[generateRandomSequence(i, electronicsChars) for j in range(50)] for i in range(2,6)]
-    fashionItemArr = [[generateRandomSequence(i, fashionChars) for j in range(50)] for i in range(2, 7)]
+    foodItemArr = [[generateRandomSequence(i, foodChars) for j in range(100)] for i in range(1,6)]
+    electronicsItemArr = [[generateRandomSequence(i, electronicsChars) for j in range(100)] for i in range(2,6)]
+    fashionItemArr = [[generateRandomSequence(i, fashionChars) for j in range(100)] for i in range(2, 7)]
 
     return foodItemArr, electronicsItemArr, fashionItemArr
     
@@ -204,7 +204,7 @@ def ComputeDistMatrix(clustDf):
     distArr = list()
     for i in range(len(clustDf['Sequence'])):
         for j in range(i+1, len(clustDf['Sequence'])):
-            distArr.append(NewLevenshteinDistance(clustDf['Sequence'][i],clustDf['Sequence'][j]))
+            distArr.append(LevenshteinDistance(clustDf['Sequence'][i],clustDf['Sequence'][j]))
     dist = squareform(distArr)
     return dist
 
@@ -216,7 +216,7 @@ def AgglomerativeCluster(clustDf):
 
 def PrintClusterObjectLabels(clustDf):
     dist = ComputeDistMatrix(clustDf)
-    aggCluster = AgglomerativeClustering(n_clusters=3, affinity='precomputed', linkage='average')
+    aggCluster = AgglomerativeClustering(n_clusters=3, affinity='precomputed', linkage='complete')
     predict = aggCluster.fit_predict(dist)
     print(predict)
     return predict
